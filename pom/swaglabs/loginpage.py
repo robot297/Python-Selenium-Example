@@ -1,15 +1,19 @@
 from pom.basepage import BasePage
-from .loginpagelocator import LoginPageLocator
 from .inventorypage import InventoryPage
+from selenium.webdriver.common.by import By
 
 class LoginPage(BasePage):
+
+    USERNAME_FIELD = (By.ID, 'user-name')
+    PASSWORD_FIELD = (By.ID, 'password')
+    LOGIN_BUTTON = (By.ID, 'login-button')
+
     def __init__(self, driver):
         super().__init__(driver)
-        self.locator = LoginPageLocator()
 
-        self.username_field = self.find_element(*self.locator.USERNAME_FIELD)
-        self.password_field = self.find_element(*self.locator.PASSWORD_FIELD)
-        self.login_button = self.find_element(*self.locator.LOGIN_BUTTON)
+        self.username_field = self.find_element(*self.USERNAME_FIELD)
+        self.password_field = self.find_element(*self.PASSWORD_FIELD)
+        self.login_button = self.find_element(*self.LOGIN_BUTTON)
 
     def type_username(self, username):
         self.username_field.clear()
